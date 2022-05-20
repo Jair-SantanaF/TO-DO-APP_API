@@ -1,10 +1,8 @@
-// Dependencias externas
 const Compression = require('compression')
 const Express = require('express')
 const Morgan = require('morgan')
 const Cors = require('cors')
 
-// Dependencias propias
 const Router = require('./src/router')
 const Config = require('./src/config')
 const Database = require('./src/database')
