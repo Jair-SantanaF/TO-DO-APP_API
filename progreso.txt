@@ -1,0 +1,17 @@
+1.- inicializamos el proyecto por medio de el comando:
+"npm init -y"
+
+2.- instalamos express para el api
+"npm i express"
+
+3.- importamos express en nuestro archivo index.js
+
+4.- instalamos dotenv para las variables de entorno
+"npm i dotenv"
+
+5.- definimos el puerto y el host en el archivo .env y lo importamos
+dentro del archivo config.js para desde ahi exportarlo y asi
+poder importarlo en todos lados de forma mas sencilla 
+
+6.- usamos App.use(Express.json()) para poder convertir cualquier
+archivo recibido en formato json
