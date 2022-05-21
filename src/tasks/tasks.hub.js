@@ -15,11 +15,9 @@ async function createTask(req, res) {
         const tasks = new Fields(req)
 
         const data = {
-
             userId: tasks.userId.get(),
             name: tasks.name.get(),
             description: tasks.description.get(),
-
         }
 
         res.$data(await Service.createTask(data))

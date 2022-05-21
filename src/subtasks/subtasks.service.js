@@ -36,6 +36,9 @@ async function getSubtasks(query) {
             options.$or = []
         }
 
+        if(query.taskId)
+            options.taskId = query.taskId
+
         const subtasks = await Model.find(options)
             .skip(page * limit)
             .limit(limit)
@@ -45,6 +48,13 @@ async function getSubtasks(query) {
                 select: {
                     name: true,
                     descripton: true,
+                },
+                populate: {
+                    path: 'user',
+                    select: {
+                        name: true,
+                        email: true
+                    }
                 }
             })
 
