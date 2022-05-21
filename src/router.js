@@ -13,6 +13,7 @@ module.exports = [
     Router,
     require('./users/users.router'),
     require('./tasks/tasks.router'),
+    require('./subtasks/subtasks.router'),
     // require('./courses/courses.router'),
     // require('./sessions/sessions.router'),
 ]
