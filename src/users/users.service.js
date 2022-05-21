@@ -2,7 +2,7 @@ const Model = require('./users.model')
 const Messages = require('./users.messages')
 // const Services = require('../services')
 // const Encrypt = require('../encrypt')
-// const Moment = require('moment')
+const Moment = require('moment')
 const Methods = require('../methods')
 
 module.exports = {
