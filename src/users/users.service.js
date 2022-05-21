@@ -1,16 +1,16 @@
 const Model = require('./users.model')
-// const Messages = require('./users.messages')
+const Messages = require('./users.messages')
 // const Services = require('../services')
 // const Encrypt = require('../encrypt')
 // const Moment = require('moment')
-// const Methods = require('../methods')
+const Methods = require('../methods')
 
 module.exports = {
     // loginTeacher,
     createUser,
-    // getTeachers,
-    // updateTeacher,
-    // deleteTeacher,
+    getUsers,
+    updateUser,
+    deleteUser,
     // findTeachersId,
     // Model,
     // Messages
@@ -57,80 +57,80 @@ async function createUser(data) {
     }
 }
 
-async function getTeachers(query) {
-    try {
+async function getUsers(query) {
+     try {
 
-        const options = {}
-        const page = query.page
-        const limit = 3
+         const options = {}
+         const page = query.page
+         const limit = 5
 
-        if(query.find) {
-            const regexp = new RegExp(query.find, 'i')
-            options.$or = [
-                { name: regexp },
-                { phone: regexp },
-                { email: regexp },
-            ]
-        }
+         if(query.find) {
+             const regexp = new RegExp(query.find, 'i')
+             options.$or = [
+                 { name: regexp },
+                 { phone: regexp },
+                 { email: regexp },
+             ]
+         }
 
-        if(query.status)
-            options.status = query.status
+         if(query.status)
+             options.status = query.status
 
-        const teachers = await Model.find(options)
-            .skip(limit * page)
-            .limit(limit)
-            .sort({created: -1})
+         const users = await Model.find(options)
+             .skip(limit * page)
+             .limit(limit)
+             .sort({created: -1})
 
-        const total = await Model.countDocuments(options)
+         const total = await Model.countDocuments(options)
 
-        return {
-            teachers,
-            metadata: Methods.metadata(page, limit, total, teachers.length),
-            query
-        }
-
-    } catch(error) {
-        throw error
-    }
-}
-
-async function getTeacher(teacherId) {
-    try {
-
-        const teacher = await Model.findOne({_id: teacherId})
-
-        if(!teacher)
-            throw Messages(teacherId).teacherNotFound
-
-        return teacher
+         return {
+             users,
+             metadata: Methods.metadata(page, limit, total, users.length),
+             query
+         }
 
     } catch(error) {
         throw error
     }
 }
 
-async function updateTeacher(teacherId, data) {
+async function getUser(userId) {
     try {
 
-        const teacher = await getTeacher(teacherId)
+        const user = await Model.findOne({_id: userId})
+
+        if(!user)
+            throw Messages(userId).userNotFound
+
+        return user
+
+    } catch(error) {
+        throw error
+    }
+}
+
+async function updateUser(userId, data) {
+    try {
+
+        const user = await getUser(userId)
         const fields = Object.keys(data)
 
-        fields.forEach(field => teacher[field] = data[field])
+        fields.forEach(field => user[field] = data[field])
 
-        return teacher.save()
+        return user.save()
 
     } catch(error) {
         throw error
     }
 }
 
-async function deleteTeacher(teacherId) {
+async function deleteUser(userId) {
     try {
 
-        const teacher = await getTeacher(teacherId)
-        await Model.deleteOne({_id: teacherId})
+        const user = await getUser(userId)
+        await Model.deleteOne({_id: userId})
 
-        return teacher
+        return user
 
     } catch(error) {
         throw error

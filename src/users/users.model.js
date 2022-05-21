@@ -1,28 +1,28 @@
 const Schema = require('mongoose').Schema
 const Model = require('mongoose').model
 const ObjectId = require('mongoose').Types.ObjectId
-// const Messages = require('./users.messages')
+const Messages = require('./users.messages')
 // const Encrypt = require('../encrypt')
 
 const schema = new Schema({
 
-    // status: {
-    //     type: String,
-    //     enum: ['enabled', 'disabled'],
-    //     default: 'enabled'
-    // },
+     status: {
+         type: String,
+         enum: ['online', 'offline'],
+         default: 'online'
+     },
 
     name: {
         type: String
     },
 
-    // firstName: {
-    //     type: String
-    // },
+    firstName: {
+        type: String
+    },
 
-    // lastName: {
-    //     type: String
-    // },
+    lastName: {
+        type: String
+    },
 
     email: {
         type: String
@@ -41,9 +41,9 @@ const schema = new Schema({
         type: String
     },
 
-    // updated: {
-    //     type: Date
-    // },
+    updated: {
+        type: Date
+    },
 
      created: {
          type: Date,
@@ -51,35 +51,35 @@ const schema = new Schema({
      }
 })
 
-// schema.pre('save', function(next) {
+schema.pre('save', function(next) {
 
-//     this.name = `${ this.firstName } ${ this.lastName }`
-//     this.updated = new Date()
+    this.name = `${ this.firstName } ${ this.lastName }`
+    this.updated = new Date()
 
-//     if(this.password)
-//         this.password = Encrypt.bcryptHash(this.password)
+    if(this.password)
+        this.password = Encrypt.bcryptHash(this.password)
 
-//     next()
-// })
+    next()
+})
 
-// schema.post('save', function(error, doc, next) {
-//     if(error) return next(Messages(error).teacherSaveError)
-//     next()
-// })
+schema.post('save', function(error, doc, next) {
+    if(error) return next(Messages(error).userSaveError)
+    next()
+})
 
-// schema.post('findOne', function(error, doc, next) {
-//     if(error) return next(Messages(error).teacherGetError)
-//     next()
-// })
+schema.post('findOne', function(error, doc, next) {
+    if(error) return next(Messages(error).userGetError)
+    next()
+})
 
-// schema.post('find', function(error, doc, next) {
-//     if(error) return next(Messages(error).teacherGetError)
-//     next()
-// })
+schema.post('find', function(error, doc, next) {
+    if(error) return next(Messages(error).userGetError)
+    next()
+})
 
-// schema.post('remove', function(error, doc, next) {
-//     if(error) return next( Messages(error).teacherDeleteError )
-//     next()
-// })
+schema.post('remove', function(error, doc, next) {
+    if(error) return next( Messages(error).userDeleteError )
+    next()
+})
 
 module.exports = Model('Users', schema) 
