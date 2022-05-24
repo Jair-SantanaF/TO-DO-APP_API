@@ -33,7 +33,9 @@ async function getTasks(query) {
 
         if(query.find) {
             const regexp = new RegExp(query.find, 'i')
-            options.$or = []
+            options.$or = [
+
+            ]
         }
 
         const tasks = await Model.find(options)

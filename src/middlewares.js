@@ -1,5 +1,5 @@
 const Messages = require('./messages')
-//const Services = require('./services')
+const Services = require('./services')
 
 module.exports = {
     auth,
@@ -23,7 +23,7 @@ async function auth(req, res, next) {
         if(new Date() > session.expired)
             res.$error( Messages().tokenExpiredError )
 
-        req.teacherId = session.teacherId
+        req.userId = session.userId
     
         next()
 

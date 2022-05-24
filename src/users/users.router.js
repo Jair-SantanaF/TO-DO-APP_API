@@ -1,7 +1,8 @@
 const Router = require('express').Router()
 const Hub = require('./users.hub')
+const Middlewares = require('../middlewares')
 
-// Router.post('/users/login', Hub.loginUser)
+Router.post('/users/login', Hub.loginUser)
 
 Router.post('/users', Hub.createUser)
 

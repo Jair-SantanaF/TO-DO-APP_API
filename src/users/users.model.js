@@ -2,7 +2,7 @@ const Schema = require('mongoose').Schema
 const Model = require('mongoose').model
 const ObjectId = require('mongoose').Types.ObjectId
 const Messages = require('./users.messages')
-// const Encrypt = require('../encrypt')
+const Encrypt = require('../encrypt')
 
 const schema = new Schema({
 
@@ -28,10 +28,10 @@ const schema = new Schema({
         type: String
     },
 
-    // password: {
-    //     type: String,
-    //     select: false
-    // },
+    password: {
+        type: String,
+        select: false
+    },
 
     phone: {
         type: String

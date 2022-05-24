@@ -20,6 +20,21 @@ module.exports = function(req) {
         value: props.user,
         name: 'identificador del usuario'
     })
+    this.endDate = validator({
+        type: 'string',
+        value: props.endDate,
+        name: 'fecha de termino de la tarea'
+    })
+    this.category = validator({
+        type: 'string',
+        value: props.category,
+        name: 'categoria de la tarea'
+    })
+    this.reminder = validator({
+        type: 'string',
+        value: props.reminder,
+        name: 'recordatorio de la tarea'
+    })
     this.status = validator({
         type: 'string',
         value: props.status,

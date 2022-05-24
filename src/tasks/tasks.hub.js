@@ -15,7 +15,10 @@ async function createTask(req, res) {
         const tasks = new Fields(req)
 
         const data = {
-            userId: tasks.userId.get(),
+            userId: req.userId,
+            category: tasks.category.get(),
+            endDate: tasks.endDate.get(),
+            reminder: tasks.reminder.get(),
             name: tasks.name.get(),
             description: tasks.description.get(),
         }
@@ -34,7 +37,8 @@ async function getTasks(req, res) {
 
         const query = {
             page: parseInt(req.query.page || 0),
-            find: req.query.find
+            find: req.query.find,
+            type: req.query.type
         }
 
         res.$data(await Service.getTasks(query))
@@ -70,7 +74,9 @@ async function updateTask(req, res) {
         }
 
         const fields = [
-
+            'category',
+            'endDate',
+            'reminder',
             'status',
             'name',
             'description',

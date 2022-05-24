@@ -15,9 +15,24 @@ const schema = new Schema({
     },
 
     status: {
+        type: Boolean,
+        enum: [true, false],
+        default: false
+    },
+
+    endDate: {
+        type: Date,
+    },
+
+    reminder: {
         type: String,
-        enum: ['added', 'in-progress', 'completed'],
-        default: 'added'
+        default: 'Not specified'
+    },
+
+    category: {
+        type: String,
+        enum: ["Home", "Work", "Chill", "Not specified"],
+        default: "Not specified"
     },
 
     name: {

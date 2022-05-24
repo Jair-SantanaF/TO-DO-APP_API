@@ -2,7 +2,7 @@ const Service = require('./users.service')
 const Fields = require('./users.fields')
 
 module.exports = {
-    // loginUser,
+    loginUser,
     createUser,
     getUsers,
     updateUser,
@@ -19,7 +19,7 @@ async function loginUser(req, res) {
             password: fields.password.get(),
         }
 
-        res.$data(await Service.loginTeacher(data))
+        res.$data(await Service.loginUser(data))
 
     } catch(error) {
         res.$error(error)
@@ -35,7 +35,7 @@ async function createUser(req, res) {
             firstName: fields.firstName.get(),
             lastName: fields.lastName.get(),
             email: fields.email.get(),
-            // password: fields.password.get(),
+            password: fields.password.get(),
             phone: fields.phone.get(),
             description: fields.description.get(),
         }

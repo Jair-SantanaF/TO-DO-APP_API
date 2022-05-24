@@ -22,7 +22,7 @@ async function createSubtask(req, res) {
 
         res.$data(await Service.createSubtask(data))
 
-    } catch(error) {
+    } catch (error) {
         res.$error(error)
     }
 }
@@ -40,10 +40,11 @@ async function getSubtasks(req, res) {
 
         res.$data(await Service.getSubtasks(query))
 
-    } catch(error) {
+    } catch (error) {
         res.$error(error)
     }
 }
+
 
 async function getSubtask(req, res) {
     try {
@@ -56,7 +57,7 @@ async function getSubtask(req, res) {
 
         res.$data(await Service.getSubtask(data.subtaskId))
 
-    } catch(error) {
+    } catch (error) {
         res.$error(error)
     }
 }
@@ -78,10 +79,10 @@ async function updateSubtask(req, res) {
         ]
 
         fields.forEach(field => req.body[field] && (data[field] = req.body[field]))
-        
+
         res.$data(await Service.updateSubtask(data.subtaskId, data))
 
-    } catch(error) {
+    } catch (error) {
         res.$error(error)
     }
 }
@@ -97,7 +98,7 @@ async function deleteSubtask(req, res) {
 
         res.$data(await Service.deleteSubtask(data.subtaskId))
 
-    } catch(error) {
+    } catch (error) {
         res.$error(error)
     }
 }

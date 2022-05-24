@@ -1,42 +1,42 @@
 const Model = require('./users.model')
 const Messages = require('./users.messages')
-// const Services = require('../services')
-// const Encrypt = require('../encrypt')
+const Services = require('../services')
+const Encrypt = require('../encrypt')
 const Moment = require('moment')
 const Methods = require('../methods')
 
 module.exports = {
-    // loginTeacher,
+    loginUser,
     createUser,
     getUsers,
     updateUser,
     deleteUser,
     // findTeachersId,
-    // Model,
-    // Messages
+    Model,
+    Messages
 }
 
-async function loginTeacher(data) {
+async function loginUser(data) {
     try {
 
-        const teacher = await Model.findOne({email: data.email}, '+password')
+        const user = await Model.findOne({email: data.email}, '+password')
 
-        if(!teacher)
-            throw Messages(data.email).teacherNotFound
+        if(!user)
+            throw Messages(data.email).userNotFound
 
-        if(!Encrypt.bcryptCompare(data.password, teacher.password))
-            throw Messages(data.password).teacherPasswordError
+        if(!Encrypt.bcryptCompare(data.password, user.password))
+            throw Messages(data.password).userPasswordError
 
         const sessionData = {
-            teacherId: teacher._id,
-            token: Encrypt.cryptrString( teacher._id ),
+            userId: user._id,
+            token: Encrypt.cryptrString( user._id ),
             expired: Moment().add(15, 'days').toDate()
-        }
+        } 
 
         const session = await Services.Sessions.createSession(sessionData)
 
         return {
-            teacher,
+            user,
             session
         }
 
