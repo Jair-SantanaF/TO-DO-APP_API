@@ -16,9 +16,9 @@ async function createTask(req, res) {
 
         const data = {
             userId: req.userId,
-            category: tasks.category.get(),
             endDate: tasks.endDate.get(),
             reminder: tasks.reminder.get(),
+            category: tasks.category.get(),
             name: tasks.name.get(),
             description: tasks.description.get(),
         }
@@ -38,7 +38,6 @@ async function getTasks(req, res) {
         const query = {
             page: parseInt(req.query.page || 0),
             find: req.query.find,
-            type: req.query.type
         }
 
         res.$data(await Service.getTasks(query))

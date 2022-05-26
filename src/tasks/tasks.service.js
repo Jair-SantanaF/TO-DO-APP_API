@@ -33,8 +33,10 @@ async function getTasks(query) {
 
         if(query.find) {
             const regexp = new RegExp(query.find, 'i')
-            options.$or = [
-
+            options.$or = [                
+                {name: regexp},
+                {description: regexp},
+                {category: regexp}
             ]
         }
 

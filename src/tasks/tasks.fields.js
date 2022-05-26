@@ -21,24 +21,28 @@ module.exports = function(req) {
         name: 'identificador del usuario'
     })
     this.endDate = validator({
-        type: 'string',
+        type: 'date',
         value: props.endDate,
-        name: 'fecha de termino de la tarea'
+        name: 'fecha de termino de la tarea',
+        required: false
     })
     this.category = validator({
         type: 'string',
         value: props.category,
-        name: 'categoria de la tarea'
+        name: 'categoria de la tarea',
+        required: false
     })
     this.reminder = validator({
         type: 'string',
         value: props.reminder,
-        name: 'recordatorio de la tarea'
+        name: 'recordatorio de la tarea',
+        required: false
     })
     this.status = validator({
-        type: 'string',
+        type: 'boolean',
         value: props.status,
-        name: 'estatus de la tarea'
+        name: 'estatus de la tarea',
+        required: false
     })
     this.name = validator({
         type: 'string',
@@ -48,7 +52,8 @@ module.exports = function(req) {
     this.description = validator({
         type: 'string',
         value: props.description,
-        name: 'descripcion'
+        name: 'descripcion',
+        required: false
     })
 
     return this
