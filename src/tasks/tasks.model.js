@@ -31,7 +31,7 @@ const schema = new Schema({
 
     category: {
         type: String,
-        enum: ["Home", "Work", "Chill", "Not-specified"],
+        enum: ["Home", "Work", "School", "Not-specified"],
         default: "Not-specified"
     },
 
