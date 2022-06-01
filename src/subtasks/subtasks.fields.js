@@ -7,23 +7,25 @@ module.exports = function(req) {
     this.subtaskId = validator({
         type: 'objectId',
         value: props.subtaskId,
-        name: 'identificador'
+        name: 'identificador de la sub tarea'
     })
 
     this.taskId = validator({
         type: 'objectId',
         value: props.taskId,
-        name: 'identificador'
+        name: 'identificador de la tarea',
+        required: false
     })
     this.task = validator({
         type: 'objectId',
         value: props.task,
-        name: 'identificador de la tarea'
+        name: 'nombre de la tarea'
     })
     this.status = validator({
         type: 'string',
         value: props.status,
-        name: 'estatus de la sub tarea'
+        name: 'estatus de la sub tarea',
+        required: false
     })
     this.name = validator({
         type: 'string',
@@ -33,7 +35,8 @@ module.exports = function(req) {
     this.description = validator({
         type: 'string',
         value: props.description,
-        name: 'descripcion'
+        name: 'descripcion',
+        required: false
     })
 
     return this

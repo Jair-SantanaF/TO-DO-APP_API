@@ -6,6 +6,7 @@ module.exports = {
     createTask,
     getTasks,
     getTask,
+    getStatus,
     updateTask,
     deleteTask,
     Model,
@@ -26,7 +27,6 @@ async function createTask(data) {
 
 async function getTasks(query) {
     try {
-
         const options = {}
         const limit = 100
         const page = query.page
@@ -39,6 +39,9 @@ async function getTasks(query) {
                 {category: regexp}
             ]
         }
+
+        if(query.userId)
+            options.userId = query.userId
 
         const tasks = await Model.find(options)
             .skip(page * limit)
@@ -74,6 +77,24 @@ async function getTask(taskId) {
             throw Messages(taskId).taskNotFound
 
         return task
+
+    } catch(error) {
+        throw error
+    }
+}
+
+async function getStatus(data) {
+    try {
+
+        const sumStatus = await Model.aggregate(
+            [
+                {$match: {userId: data.userId}},
+                {$match: {$or: [{status:true},{status:false}]}},
+                {$group: {_id: '$status', total: {$sum: 1}}}
+            ]
+        )
+        
+        return sumStatus
 
     } catch(error) {
         throw error

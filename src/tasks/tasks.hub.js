@@ -5,6 +5,7 @@ module.exports = {
     createTask,
     getTasks,
     getTask,
+    getStatus,
     updateTask,
     deleteTask
 }
@@ -17,6 +18,7 @@ async function createTask(req, res) {
         const data = {
             userId: req.userId,
             endDate: tasks.endDate.get(),
+            status: tasks.status.get(),
             reminder: tasks.reminder.get(),
             category: tasks.category.get(),
             name: tasks.name.get(),
@@ -36,6 +38,7 @@ async function getTasks(req, res) {
         const tasks = new Fields(req)
 
         const query = {
+            userId: req.userId,
             page: parseInt(req.query.page || 0),
             find: req.query.find,
         }
@@ -63,6 +66,20 @@ async function getTask(req, res) {
     }
 }
 
+async function getStatus(req, res) {
+    try {
+
+        const data = {
+            userId: req.userId
+        }
+
+        res.$data(await Service.getStatus(data))
+
+    } catch(error) {
+        res.$error(error)
+    }
+}
+
 async function updateTask(req, res) {
     try {
 
@@ -81,7 +98,7 @@ async function updateTask(req, res) {
             'description',
         ]
 
-        fields.forEach(field => req.body[field] && (data[field] = req.body[field]))
+        fields.forEach(field => req.body[field] != undefined && (data[field] = req.body[field]))
 
         res.$data(await Service.updateTask(data.taskId, data))
 

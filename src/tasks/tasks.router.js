@@ -6,6 +6,8 @@ Router.post('/tasks', Middlewares.auth, Hub.createTask)
 
 Router.get('/tasks', Middlewares.auth, Hub.getTasks)
 
+Router.get('/tasks/status', Middlewares.auth, Hub.getStatus)
+
 Router.get('/tasks/:taskId', Middlewares.auth, Hub.getTask)
 
 Router.put('/tasks/:taskId', Middlewares.auth, Hub.updateTask)

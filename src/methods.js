@@ -15,6 +15,6 @@ function metadata(page, limit, total, items) {
         items,
         pages,
         next,
-        previous
+        previous,
     }
 }
